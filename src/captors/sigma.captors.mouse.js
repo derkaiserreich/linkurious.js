@@ -350,6 +350,9 @@
 
         sigma.utils.zoomTo(_camera, pos.x, pos.y, ratio, animation);
 
+        var event = sigma.utils.mouseCoords(e, pos.x, pos.y); 
+        _self.dispatchEvent('mousewheel', event);
+        
         if (e.preventDefault)
           e.preventDefault();
         else

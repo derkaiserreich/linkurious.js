@@ -411,7 +411,8 @@
           'upNode',
           'upNodes',
           'upEdge',
-          'upEdges'
+          'upEdges',
+          'mousewheel'
         ],
         this._handler
       );

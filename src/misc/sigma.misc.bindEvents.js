@@ -260,6 +260,12 @@
           overNodes = {},
           overEdges = {};
 
+      function onMouseWheel(e){
+        if (!self.settings('eventsEnabled'))
+          return;
+        self.dispatchEvent('mousewheel', e);
+      }
+
       function onClick(e) {
         if (!self.settings('eventsEnabled'))
           return;
@@ -453,6 +459,7 @@
       }
 
       // Bind events:
+      captor.bind('mousewheel', onMouseWheel);
       captor.bind('click', onClick);
       captor.bind('mousedown', onMove);
       captor.bind('mouseup', onMove);
