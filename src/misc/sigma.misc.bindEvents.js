@@ -263,7 +263,9 @@
       function onMouseWheel(e){
         if (!self.settings('eventsEnabled'))
           return;
-        self.dispatchEvent('mousewheel', e);
+        self.dispatchEvent('mousewheel', {
+          captor: e.data
+        });
       }
 
       function onClick(e) {

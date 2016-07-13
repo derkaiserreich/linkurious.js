@@ -331,10 +331,12 @@
     function _wheelHandler(e) {
       var pos,
           ratio,
+          delta,
           animation;
 
       if (_settings('mouseEnabled') && _settings('mouseWheelEnabled') && (!_settings('clickToFocus') || _self.eltFocused)) {
-        ratio = sigma.utils.getDelta(e) > 0 ?
+        delta = sigma.utils.getDelta(e);
+        ratio = delta > 0 ?
           1 / _settings('zoomingRatio') :
           _settings('zoomingRatio');
 
@@ -350,7 +352,19 @@
 
         sigma.utils.zoomTo(_camera, pos.x, pos.y, ratio, animation);
 
-        var event = sigma.utils.mouseCoords(e, pos.x, pos.y); 
+        var event = {
+          x: pos.x,
+          y: pos.y,
+          clientX: e.clientX,
+          clientY: e.clientY,
+          ctrlKey: e.ctrlKey,
+          metaKey: e.metaKey,
+          altKey: e.altKey,
+          shiftKey: e.shiftKey,
+          zoom: delta > 0 ? 'in' : 'out',
+          ratio: _camera.ratio
+        }
+
         _self.dispatchEvent('mousewheel', event);
         
         if (e.preventDefault)
